@@ -27,7 +27,34 @@ export default function BookingModal() {
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    
+    if (name === 'date') {
+      const selectedDate = new Date(value);
+      // getUTCDay is used to avoid timezone shift issues when parsing YYYY-MM-DD strings
+      if (selectedDate.getUTCDay() === 0) {
+        alert('Sorry, we are closed on Sundays. Please select another date.');
+        setFormData({ ...formData, date: '' });
+        return;
+      }
+    }
+    
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const generateTimeOptions = () => {
+    const options = [];
+    for (let i = 7; i <= 17; i++) {
+      const hour12 = i > 12 ? i - 12 : i;
+      const ampm = i >= 12 ? 'PM' : 'AM';
+      const formattedHour = i.toString().padStart(2, '0');
+      options.push(
+        <option key={formattedHour} value={`${formattedHour}:00`}>
+          {`${hour12}:00 ${ampm}`}
+        </option>
+      );
+    }
+    return options;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -175,7 +202,10 @@ export default function BookingModal() {
                       </div>
                       <div>
                         <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-1">Preferred Time</label>
-                        <input type="time" id="time" name="time" value={formData.time} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all text-gray-900" />
+                        <select id="time" name="time" value={formData.time} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all bg-white text-gray-900">
+                          <option value="" disabled>Select a time</option>
+                          {generateTimeOptions()}
+                        </select>
                       </div>
                     </div>
 
