@@ -111,7 +111,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-              src="/images/business_svc.jpg" 
+              src="/ez1junk/images/business_svc.jpg" 
               alt="Business Services" 
               className="w-full h-full object-cover"
             />

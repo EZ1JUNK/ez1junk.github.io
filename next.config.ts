@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   basePath: '/ez1junk',
-  assetPrefix: '/ez1junk',
+  assetPrefix: '/ez1junk/',
   output: 'export',
   transpilePackages: ['motion'],
   webpack: (config, {dev}) => {

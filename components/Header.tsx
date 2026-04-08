@@ -37,7 +37,7 @@ export default function Header() {
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center gap-2 relative h-12 w-32">
               <Image 
-                src="/images/index_04.png" 
+                src="/ez1junk/images/index_04.png" 
                 alt="1-888-EZ1-JUNK" 
                 fill
                 className="object-contain"

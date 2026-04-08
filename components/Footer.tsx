@@ -14,7 +14,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-6 relative h-12 w-32 inline-block">
               <Image 
-                src="/images/index_04.png" 
+                src="/ez1junk/images/index_04.png" 
                 alt="1-888-EZ1-JUNK" 
                 fill
                 className="object-contain"
