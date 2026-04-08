@@ -1,0 +1,14 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/config-schema",
+  "configurations": {
+    "ez1-junk": {
+      "appLocation": ".",
+      "outputLocation": "out",
+      "appBuildCommand": "npm run build",
+      "run": "npm run dev",
+      "appDevserverUrl": "http://localhost:3000",
+      "appName": "ez1-junk",
+      "resourceGroup": "ez1-junk-rg"
+    }
+  }
+}
