@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/ez1junk/favicon.ico',
+    icon: '/favicon.ico',
   },
 };
 

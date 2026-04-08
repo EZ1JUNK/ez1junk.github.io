@@ -12,7 +12,7 @@ const services = [
     icon: Home,
     color: 'bg-green-50 text-green-600',
     features: ['Garage Cleanouts', 'Basement Clearing', 'Attic Junk Removal', 'Backyard Debris'],
-    image: '/ez1junk/images/index_12.jpg'
+    image: '/images/index_12.jpg'
   },
   {
     title: 'Business Junk Removal',
@@ -20,7 +20,7 @@ const services = [
     icon: Building2,
     color: 'bg-emerald-50 text-emerald-600',
     features: ['Office Furniture', 'Warehouse Clearing', 'Retail Store Cleanouts', 'Electronic Waste'],
-    image: '/ez1junk/images/index_14.jpg'
+    image: '/images/index_14.jpg'
   },
   {
     title: 'EZ Junk Removal',
@@ -28,7 +28,7 @@ const services = [
     icon: Recycle,
     color: 'bg-teal-50 text-teal-600',
     features: ['Reliable Service', 'EZ Process', 'Cleaner Results', 'Eco-Friendly Disposal'],
-    image: '/ez1junk/images/index_18.jpg'
+    image: '/images/index_18.jpg'
   }
 ];
 
