@@ -9,8 +9,39 @@ import Footer from '@/components/Footer';
 import CTAButton from '@/components/CTAButton';
 
 export default function Home() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: '1-888-EZ1-JUNK',
+    image: 'https://1888ez1junk.com/images/index_04.png',
+    '@id': 'https://1888ez1junk.com',
+    url: 'https://1888ez1junk.com',
+    telephone: '1-888-391-5865',
+    priceRange: '$$',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'New York',
+      addressRegion: 'NY',
+      addressCountry: 'US'
+    },
+    areaServed: [
+      'Manhattan',
+      'Queens',
+      'Brooklyn',
+      'Bronx',
+      'Staten Island',
+      'Long Island',
+      'Nassau County',
+      'Suffolk County'
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
       <main>
         <Hero />
