@@ -68,7 +68,7 @@ export default function BookingModal() {
       phone_number: formData.phone,
       service_needed: formData.service,
       additional_details: formData.message,
-      booking_datetime: (formData.date && formData.time) ? `${formData.date}T${formData.time}:00` : new Date().toISOString(),
+      requested_datetime: (formData.date && formData.time) ? `${formData.date}T${formData.time}:00` : new Date().toISOString(),
     };
 
     try {
