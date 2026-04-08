@@ -8,6 +8,16 @@ export default function BookingModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    datetime: '',
+    service: 'Home Junk Removal',
+    message: ''
+  });
 
   useEffect(() => {
     const handleOpen = () => setIsOpen(true);
@@ -15,20 +25,22 @@ export default function BookingModal() {
     return () => window.removeEventListener('openBookingModal', handleOpen);
   }, []);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    const formData = new FormData(e.currentTarget);
-    
     const payload = {
-      first_name: formData.get('firstName'),
-      last_name: formData.get('lastName'),
-      email: formData.get('email'),
-      phone_number: formData.get('phone'),
-      service_needed: formData.get('service'),
-      additional_details: formData.get('message'),
-      booking_datetime: formData.get('datetime') || new Date().toISOString(),
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      email: formData.email,
+      phone_number: formData.phone,
+      service_needed: formData.service,
+      additional_details: formData.message,
+      booking_datetime: formData.datetime || new Date().toISOString(),
     };
 
     try {
@@ -43,6 +55,11 @@ export default function BookingModal() {
       if (!response.ok) throw new Error('Booking failed');
 
       setIsSuccess(true);
+      // Clear form on success
+      setFormData({
+        firstName: '', lastName: '', email: '', phone: '', datetime: '', service: 'Home Junk Removal', message: ''
+      });
+      
       setTimeout(() => {
         setIsOpen(false);
         setIsSuccess(false);
@@ -121,33 +138,33 @@ export default function BookingModal() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                        <input type="text" id="firstName" name="firstName" required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" placeholder="John" />
+                        <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" placeholder="John" />
                       </div>
                       <div>
                         <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" placeholder="Doe" />
+                        <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" placeholder="Doe" />
                       </div>
                     </div>
 
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                      <input type="email" id="email" name="email" required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" placeholder="john@example.com" />
+                      <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" placeholder="john@example.com" />
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" placeholder="(555) 123-4567" />
+                        <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" placeholder="(555) 123-4567" />
                       </div>
                       <div>
                         <label htmlFor="datetime" className="block text-sm font-medium text-gray-700 mb-1">Preferred Date & Time</label>
-                        <input type="datetime-local" id="datetime" name="datetime" required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" />
+                        <input type="datetime-local" id="datetime" name="datetime" value={formData.datetime} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" />
                       </div>
                     </div>
 
                     <div>
                       <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">Service Needed</label>
-                      <select id="service" name="service" className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all bg-white">
+                      <select id="service" name="service" value={formData.service} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all bg-white">
                         <option>Home Junk Removal</option>
                         <option>Business Junk Removal</option>
                         <option>Construction Debris</option>
@@ -157,7 +174,7 @@ export default function BookingModal() {
 
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Additional Details</label>
-                      <textarea id="message" name="message" rows={3} className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all resize-none" placeholder="Tell us what needs to be removed..."></textarea>
+                      <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={3} className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all resize-none" placeholder="Tell us what needs to be removed..."></textarea>
                     </div>
 
                     <motion.button 
