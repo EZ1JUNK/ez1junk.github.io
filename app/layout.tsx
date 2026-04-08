@@ -16,6 +16,9 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: '1-888-EZ1-JUNK | NYC #1 Junk Removal',
   description: 'Modern landing page for 1-888-EZ1-JUNK, NYC\'s #1 Junk Removal Service.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
