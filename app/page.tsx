@@ -53,7 +53,7 @@ export default function Home() {
         
         {/* CTA Section */}
         <section className="py-24 bg-green-600 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10 mix-blend-overlay bg-cover bg-center" style={{ backgroundImage: "url('/ez1junk/images/skyline2.png')" }}></div>
+          <div className="absolute inset-0 opacity-10 mix-blend-overlay bg-cover bg-center" style={{ backgroundImage: "url('/images/skyline2.png')" }}></div>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
             <h2 className="font-heading text-4xl md:text-5xl font-black text-white mb-6">Ready to get rid of your junk?</h2>
             <p className="text-xl text-green-100 mb-10">

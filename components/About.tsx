@@ -45,7 +45,7 @@ export default function About() {
             <motion.img 
               whileHover={{ scale: 1.05, rotate: -2 }}
               transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
-              src="/ez1junk/images/re_think_green.jpg" 
+              src="/images/re_think_green.jpg" 
               alt="ReThink Green" 
               className="w-full max-w-sm lg:max-w-md object-contain drop-shadow-2xl relative z-10"
             />
