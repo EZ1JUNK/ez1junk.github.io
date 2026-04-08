@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { X, Send } from 'lucide-react';
+import { X, Send, Calendar, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function BookingModal() {
@@ -198,14 +198,45 @@ export default function BookingModal() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">Preferred Date</label>
-                        <input type="date" id="date" name="date" value={formData.date} min={new Date().toISOString().split('T')[0]} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all text-gray-900" />
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <Calendar className="h-5 w-5 text-gray-400" />
+                          </div>
+                          <input 
+                            type="date" 
+                            id="date" 
+                            name="date" 
+                            value={formData.date} 
+                            min={new Date().toISOString().split('T')[0]} 
+                            onChange={handleChange} 
+                            required 
+                            className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all text-gray-900 bg-white cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer" 
+                          />
+                        </div>
                       </div>
                       <div>
                         <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-1">Preferred Time</label>
-                        <select id="time" name="time" value={formData.time} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all bg-white text-gray-900">
-                          <option value="" disabled>Select a time</option>
-                          {generateTimeOptions()}
-                        </select>
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <Clock className="h-5 w-5 text-gray-400" />
+                          </div>
+                          <select 
+                            id="time" 
+                            name="time" 
+                            value={formData.time} 
+                            onChange={handleChange} 
+                            required 
+                            className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all bg-white text-gray-900 appearance-none cursor-pointer"
+                          >
+                            <option value="" disabled>Select a time</option>
+                            {generateTimeOptions()}
+                          </select>
+                          <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                            <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
