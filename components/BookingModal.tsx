@@ -186,7 +186,7 @@ export default function BookingModal() {
                       </div>
                       <div>
                         <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">Service Needed</label>
-                        <select id="service" name="service" value={formData.service} onChange={handleChange} className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all bg-white">
+                        <select id="service" name="service" value={formData.service} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all bg-white">
                           <option>Home Junk Removal</option>
                           <option>Business Junk Removal</option>
                           <option>Construction Debris</option>
