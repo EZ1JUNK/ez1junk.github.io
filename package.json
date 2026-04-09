@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "clean": "next clean",
-    "predeploy": "npm run build && echo 1888ez1junk.com > out/CNAME",
-    "deploy": "gh-pages -d out -b master -r https://github.com/EZ1JUNK/ez1junk.github.io.git"
+    "predeploy": "npm run build && echo 1888ez1junk.com > out/CNAME && type nul > out/.nojekyll",
+    "deploy": "gh-pages -d out -t -b master -r https://github.com/EZ1JUNK/ez1junk.github.io.git"
   },
   "dependencies": {
     "@google/genai": "^1.17.0",
