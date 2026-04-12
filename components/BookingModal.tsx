@@ -65,14 +65,14 @@ export default function BookingModal() {
       first_name: formData.firstName,
       last_name: formData.lastName,
       email: formData.email,
-      phone_number: formData.phone,
+      phone_number: formData.phone.replace(/\D/g, ''),
       service_needed: formData.service,
       additional_details: formData.message,
-      requested_datetime: (formData.date && formData.time) ? `${formData.date}T${formData.time}:00` : new Date().toISOString(),
+      requested_datetime: (formData.date && formData.time) ? `${formData.date}T${formData.time}:00Z` : new Date().toISOString(),
     };
 
     try {
-      const response = await fetch('https://ez1junk.retool.com/url/booking', {
+      const response = await fetch('https://ez1junk.retool.com/url/online-booking', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,10 +119,10 @@ export default function BookingModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
-            className="relative bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden"
+            className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden"
           >
-            <div className="flex justify-between items-center p-6 border-b border-gray-100">
-              <h3 className="text-2xl font-bold text-gray-900">Book Online</h3>
+            <div className="flex justify-between items-center p-4 sm:p-6 border-b border-gray-100 shrink-0">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900">Book Online</h3>
               <button 
                 onClick={() => setIsOpen(false)}
                 className="text-gray-400 hover:text-gray-900 transition-colors p-1"
@@ -131,7 +131,7 @@ export default function BookingModal() {
               </button>
             </div>
 
-            <div className="p-6">
+            <div className="p-4 sm:p-6 overflow-y-auto">
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   <motion.div 
@@ -139,7 +139,7 @@ export default function BookingModal() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="text-center py-12"
+                    className="text-center py-8 sm:py-12"
                   >
                     <motion.div 
                       initial={{ scale: 0 }}
@@ -151,7 +151,7 @@ export default function BookingModal() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </motion.div>
-                    <h4 className="text-2xl font-bold text-gray-900 mb-2">Request Received!</h4>
+                    <h4 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Request Received!</h4>
                     <p className="text-gray-600">We&apos;ll get back to you shortly to confirm your appointment.</p>
                   </motion.div>
                 ) : (
@@ -161,32 +161,32 @@ export default function BookingModal() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onSubmit={handleSubmit} 
-                    className="space-y-4"
+                    className="space-y-3 sm:space-y-4"
                   >
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
-                        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                        <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" placeholder="John" />
+                        <label htmlFor="firstName" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">First Name</label>
+                        <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} required className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all text-sm sm:text-base" placeholder="John" />
                       </div>
                       <div>
-                        <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" placeholder="Doe" />
+                        <label htmlFor="lastName" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} required className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all text-sm sm:text-base" placeholder="Doe" />
                       </div>
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                      <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" placeholder="john@example.com" />
+                      <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                      <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all text-sm sm:text-base" placeholder="john@example.com" />
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all" placeholder="(555) 123-4567" />
+                        <label htmlFor="phone" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all text-sm sm:text-base" placeholder="(555) 123-4567" />
                       </div>
                       <div>
-                        <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">Service Needed</label>
-                        <select id="service" name="service" value={formData.service} onChange={handleChange} required className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all bg-white">
+                        <label htmlFor="service" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Service Needed</label>
+                        <select id="service" name="service" value={formData.service} onChange={handleChange} required className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all bg-white text-sm sm:text-base">
                           <option>Home Junk Removal</option>
                           <option>Business Junk Removal</option>
                           <option>Construction Debris</option>
@@ -195,12 +195,12 @@ export default function BookingModal() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
-                        <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">Preferred Date</label>
+                        <label htmlFor="date" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Preferred Date</label>
                         <div className="relative">
-                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <Calendar className="h-5 w-5 text-gray-400" />
+                          <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                            <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                           </div>
                           <input 
                             type="date" 
@@ -210,15 +210,15 @@ export default function BookingModal() {
                             min={new Date().toISOString().split('T')[0]} 
                             onChange={handleChange} 
                             required 
-                            className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all text-gray-900 bg-white cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer" 
+                            className="w-full pl-9 sm:pl-11 pr-3 sm:pr-4 py-2 sm:py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all text-xs sm:text-sm text-gray-900 bg-white cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer" 
                           />
                         </div>
                       </div>
                       <div>
-                        <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-1">Preferred Time</label>
+                        <label htmlFor="time" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Preferred Time</label>
                         <div className="relative">
-                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <Clock className="h-5 w-5 text-gray-400" />
+                          <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                            <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                           </div>
                           <select 
                             id="time" 
@@ -226,13 +226,13 @@ export default function BookingModal() {
                             value={formData.time} 
                             onChange={handleChange} 
                             required 
-                            className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all bg-white text-gray-900 appearance-none cursor-pointer"
+                            className="w-full pl-9 sm:pl-11 pr-3 sm:pr-4 py-2 sm:py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all bg-white text-xs sm:text-sm text-gray-900 appearance-none cursor-pointer"
                           >
                             <option value="" disabled>Select a time</option>
                             {generateTimeOptions()}
                           </select>
-                          <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                            <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <div className="absolute inset-y-0 right-0 pr-3 sm:pr-4 flex items-center pointer-events-none">
+                            <svg className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                               <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
                           </div>
@@ -241,8 +241,8 @@ export default function BookingModal() {
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Additional Details</label>
-                      <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={3} className="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all resize-none" placeholder="Tell us what needs to be removed..."></textarea>
+                      <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Additional Details</label>
+                      <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={2} className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none transition-all resize-none text-sm sm:text-base" placeholder="Tell us what needs to be removed..."></textarea>
                     </div>
 
                     <motion.button 
@@ -250,13 +250,13 @@ export default function BookingModal() {
                       whileTap={{ scale: 0.98 }}
                       type="submit" 
                       disabled={isSubmitting}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed mt-2"
+                      className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 sm:py-3.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed mt-1 sm:mt-2 text-sm sm:text-base"
                     >
                       {isSubmitting ? (
-                        <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                       ) : (
                         <>
-                          <Send className="w-5 h-5" />
+                          <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                           Submit Request
                         </>
                       )}
