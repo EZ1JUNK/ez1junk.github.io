@@ -71,7 +71,7 @@ export default function About() {
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-gray-900 mb-2">Fully Licensed</h4>
-                  <p className="text-gray-600 leading-relaxed">We operate under BIC LICENSE #3177, ensuring professional and compliant waste removal.</p>
+                  <p className="text-gray-600 leading-relaxed">We operate under NYC Business Integrity Commission License, ensuring professional and compliant waste removal.</p>
                 </div>
               </motion.div>
 
